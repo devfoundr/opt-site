@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Загрузка прайса — ОптСнаб (демо-админка)</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- SheetJS: чтение Excel прямо в браузере -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span class="mark">О</span>
+        <span>ОптСнаб<br><span class="sub">админ-панель</span></span>
+      </a>
+      <div class="header-actions">
+        <a class="cart-btn" href="index.html" style="background:#f1f3f7;color:#1a1f29">← В магазин</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-wrap">
+    <div class="pagehead">
+      <h1>Обновление каталога из Excel</h1>
+    </div>
+    <p class="muted" style="margin-top:0">Загрузите файл прайса в формате <code>.xlsx</code> — каталог в магазине обновится мгновенно. Никакого программиста и пересборки сайта не нужно.</p>
+
+    <div class="admin-note">
+      <b>Демо:</b> данные сохраняются только в этом браузере (localStorage). В рабочей версии прайс будет сохраняться на сервере и виден всем посетителям.
+    </div>
+
+    <!-- Зона загрузки -->
+    <div class="dropzone" id="dropzone">
+      <div class="ico">📤</div>
+      <h3>Перетащите файл сюда или нажмите, чтобы выбрать</h3>
+      <p>Поддерживаются .xlsx и .xls</p>
+      <input type="file" id="fileInput" accept=".xlsx,.xls" hidden>
+    </div>
+
+    <div class="status-line" id="status"></div>
+
+    <!-- Предпросмотр -->
+    <div id="previewBox" style="display:none">
+      <div class="toolbar-row">
+        <button class="btn btn-primary" id="applyBtn">✓ Применить — обновить каталог</button>
+        <button class="btn btn-ghost" id="cancelBtn">Отмена</button>
+        <span class="muted" id="previewInfo"></span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="preview-table" id="previewTable"></table>
+      </div>
+      <p class="muted" id="moreRows"></p>
+    </div>
+
+    <!-- Текущее состояние + шаблон -->
+    <div style="margin-top:36px">
+      <h3>Текущий каталог</h3>
+      <p class="muted" id="currentInfo"></p>
+      <div class="toolbar-row">
+        <button class="btn btn-ghost" id="downloadTemplate">⬇️ Скачать шаблон прайса (.xlsx)</button>
+        <button class="btn btn-ghost" id="resetBtn">↺ Сбросить к демо-данным</button>
+      </div>
+    </div>
+
+    <!-- Формат файла -->
+    <div style="margin-top:36px">
+      <h3>Формат Excel-файла</h3>
+      <p class="muted">Первая строка — заголовки колонок. Порядок колонок не важен, важны их названия:</p>
+      <table class="spec-table">
+        <tr><th>Колонка</th><th>Обязательная</th><th>Описание</th></tr>
+        <tr><td><code>Артикул</code></td><td>да</td><td>Уникальный код товара (SKU)</td></tr>
+        <tr><td><code>Наименование</code></td><td>да</td><td>Название товара</td></tr>
+        <tr><td><code>Категория</code></td><td>да</td><td>Напр.: Канцелярия, Сантехника, Бумага, Хозтовары</td></tr>
+        <tr><td><code>Цена</code></td><td>да</td><td>Оптовая цена, число (₽)</td></tr>
+        <tr><td><code>Единица</code></td><td>нет</td><td>шт., упак., пачка… (по умолчанию «шт.»)</td></tr>
+        <tr><td><code>Мин.партия</code></td><td>нет</td><td>Минимальный заказ, число (по умолчанию 1)</td></tr>
+        <tr><td><code>Остаток</code></td><td>нет</td><td>Кол-во на складе, число</td></tr>
+        <tr><td><code>Описание</code></td><td>нет</td><td>Текст описания товара</td></tr>
+      </table>
+      <p class="muted">Подсказка: скачайте шаблон выше, замените строки на свои товары и загрузите обратно.</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ОптСнаб — канцелярия и сантехника оптом</title>
+  <meta name="description" content="Оптовая торговля канцелярскими товарами, бумагой, сантехникой и хозтоварами. Работаем с организациями и ИП.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- Верхняя полоса -->
+  <div class="topbar">
+    <div class="container">
+      <span>Опт для организаций и ИП · Доставка по РФ · Отсрочка платежа</span>
+      <span><a href="tel:+74950000000" class="phone">+7 (495) 000-00-00</a></span>
+    </div>
+  </div>
+
+  <!-- Шапка -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span class="mark">О</span>
+        <span>ОптСнаб<br><span class="sub">канцелярия · сантехника</span></span>
+      </a>
+      <form class="searchbar" id="searchForm" onsubmit="return false">
+        <input type="search" id="searchInput" placeholder="Поиск по названию или артикулу…" autocomplete="off">
+        <button type="button" id="searchBtn">Найти</button>
+      </form>
+      <div class="header-actions">
+        <a class="cart-btn" href="admin.html" title="Загрузка прайса" style="background:#f1f3f7;color:#1a1f29">⚙️ Прайс</a>
+        <button class="cart-btn" id="openCart">
+          🛒 Корзина <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Канцелярия и сантехника оптом</h1>
+      <p>Прямые поставки для офисов, школ, магазинов и подрядчиков. Гибкие цены от объёма, отсрочка платежа, доставка по всей России.</p>
+      <div class="badges">
+        <span class="badge">📦 Более 5 000 позиций</span>
+        <span class="badge">🚚 Доставка от 1 дня</span>
+        <span class="badge">📄 Закрывающие документы</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Каталог -->
+  <div class="container">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="panel">
+          <h3>Категории</h3>
+          <ul class="cat-list" id="catList"></ul>
+        </div>
+      </aside>
+
+      <main>
+        <div class="catalog-head">
+          <div>
+            <h2 id="catTitle">Все товары</h2>
+            <div class="found" id="foundCount"></div>
+          </div>
+          <div class="sort">
+            <select id="sortSelect">
+              <option value="default">Сортировка: по умолчанию</option>
+              <option value="price-asc">Цена: по возрастанию</option>
+              <option value="price-desc">Цена: по убыванию</option>
+              <option value="name">Название: А–Я</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid" id="grid"></div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Подвал -->
+  <footer class="footer">
+    <div class="container">
+      <div class="col">
+        <h4>ОптСнаб</h4>
+        <p>Оптовая торговля канцелярией<br>и сантехникой с 2012 года</p>
+        <p style="margin-top:12px">⚠️ Демо-версия сайта</p>
+      </div>
+      <div class="col">
+        <h4>Покупателям</h4>
+        <p><a href="#">Как сделать заказ</a></p>
+        <p><a href="#">Условия доставки</a></p>
+        <p><a href="#">Прайс-лист</a></p>
+      </div>
+      <div class="col">
+        <h4>Контакты</h4>
+        <p>+7 (495) 000-00-00</p>
+        <p>opt@optsnab.example</p>
+        <p>г. Москва, ул. Складская, 1</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модалка: карточка товара -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal wide">
+      <div class="modal-head">
+        <h3>Карточка товара</h3>
+        <button class="modal-close" data-close>&times;</button>
+      </div>
+      <div class="modal-body" id="productModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Модалка: корзина -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Корзина</h3>
+        <button class="modal-close" data-close>&times;</button>
+      </div>
+      <div class="modal-body" id="cartModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Модалка: оптовая заявка -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Оптовая заявка</h3>
+        <button class="modal-close" data-close>&times;</button>
+      </div>
+      <div class="modal-body" id="orderModalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
